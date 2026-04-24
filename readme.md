@@ -1,6 +1,94 @@
-# DevOpsConnect Monorepo
+# 🚀 DevOpsConnect Monorepo
 
-This repository contains the full-stack DevOpsConnect application, organized as a monorepo with separate folders for backend, frontend, and infrastructure services.
+This repository contains the full-stack **DevOpsConnect** application, organized as a monorepo with separate folders for backend, frontend, and infrastructure services.
+
+---
+## 🧠 System Architecture
+
+<p align="center">
+  <img src="ARCHITECTURE.jpg" width="550"/>
+</p>
+
+### 📌 Overview
+The application is deployed using a secure and scalable AWS architecture:
+
+- The system runs inside a **VPC (Virtual Private Cloud)**  
+- It is divided into:
+  - **Public Subnet** → Load Balancer & Bastion Host  
+  - **Private Subnet** → Application & Databases  
+
+### 🔄 Request Flow
+1. User sends request  
+2. Request reaches **Load Balancer (ELB)**  
+3. Routing:
+   - `/api` → Backend (Node.js)  
+   - Other routes → Frontend (Next.js)  
+4. Backend communicates with:
+   - **Redis** (caching)  
+   - **RabbitMQ** (message queue)  
+   - **RDS** (PostgreSQL database)  
+
+### 🔐 Security
+- Only **Load Balancer** is publicly accessible  
+- Backend and database are inside **private subnet**  
+- **Bastion Host** is used for secure SSH access  
+
+---
+
+## 🌐 VPC Setup
+
+![VPC](VPC%20SETUP.png)
+
+### 📌 Description
+- Defines the network structure of the application  
+- Includes:
+  - VPC CIDR block  
+  - Public & Private subnets  
+  - Route tables  
+  - Internet Gateway & NAT Gateway  
+
+---
+
+## 🖥️ EC2 Instances
+
+![EC2](EC2%20INSTANCES.png)
+
+### 📌 Description
+- Multiple EC2 instances are used for:
+  - Frontend  
+  - Backend  
+  - Redis  
+  - RabbitMQ  
+- Instances are distributed for **scalability and fault tolerance**
+
+---
+
+## 🗄️ RDS (Database)
+
+![RDS](RDS.png)
+
+### 📌 Description
+- Managed **PostgreSQL database** using AWS RDS  
+- Provides:
+  - Automated backups  
+  - High availability  
+  - Secure access from backend only  
+
+---
+
+## 📡 Request Checking
+
+![Request](REQUEST-CHECKING.png)
+
+### 📌 Description
+- Demonstrates API request flow  
+- Shows:
+  - Request URL  
+  - HTTP Method (POST)  
+  - Status Code (200 OK)  
+- Confirms backend API is working correctly via Load Balancer  
+
+---
 
 ## Project Structure
 
@@ -58,5 +146,3 @@ Each folder contains a `.env.example` file. Copy it to `.env` and fill in your v
 - Start frontend: `npm start` in `frontend/`
 
 ---
-
-For more details, see the `README.md` in each folder.
