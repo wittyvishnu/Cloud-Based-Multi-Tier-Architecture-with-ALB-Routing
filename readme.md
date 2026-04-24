@@ -6,7 +6,7 @@ This repository contains the full-stack **DevOpsConnect** application, organized
 ## 🧠 System Architecture
 
 <p align="center">
-  <img src="ARCHITECTURE.jpg" width="550"/>
+  <img src="ARCHITECTURE.jpeg" width="550"/>
 </p>
 
 ### 📌 Overview
